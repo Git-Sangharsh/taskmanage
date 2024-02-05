@@ -1,0 +1,66 @@
+.admin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: black;
+}
+
+.main-admin-header{
+    color: white;
+}
+
+.admin-wrapper{
+    border: 1px solid white;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.admin-headers{
+    width: 100%;
+    text-align: start;
+    font-size: 18px;
+    margin: 10px 0px 0px 0px;
+    color: white;
+}
+
+a{
+    width: 100%;
+    font-size: 8px ;
+    margin: 0px 10px 0px 10px;
+    width: 100%;
+    color: white;
+    text-decoration: none;
+
+}
+a:hover{
+    text-decoration: underline;
+    color: rgb(0, 106, 255);
+}
+.admin-input{
+    padding: 6px;
+    width: 200px;
+    color: black;
+    outline: none;
+    border: 1px solid white;
+    font-weight: bold;
+}
+
+.admin-enter{
+    padding: 5px;
+    background-color:  rgb(0, 106, 255);
+    border: 1px solid  rgb(0, 106, 255);
+    margin: 20px 0px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.admin-enter:hover{
+    scale: 1.1;
+}

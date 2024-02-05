@@ -1,0 +1,137 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+
+const UserSide = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const adminName = useSelector((state) => state.adminName);
+  const signInUserName = useSelector((state) => state.signInUserName);
+  const displayUserName =
+    adminName !== "" ? adminName : signInUserName || "Default Name";
+    const mainTaskArray = useSelector((state) => state.userMainArray);
+    const [forwardTask, setForwardTask] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
+    const [viewTask, setViewTask] = useState(true);
+    const [showDesc, setShowDesc] = useState(false);
+    const [deleteIcon, setDeleteIcon] = useState(false);
+
+    const handleLogOut = () => {
+      dispatch({ type: "SET_ADMIN_NAME", payload: "" });
+      navigate("/");
+    };
+
+    const handleViewTask = () => {
+      setViewTask(!viewTask);
+    };
+
+    const handleCheckBox = () => {
+      setIsChecked(!isChecked);
+    };
+
+    const handleDesc = () => {
+      setShowDesc(!showDesc);
+    };
+
+    const handleDelete = () => {
+      setDeleteIcon(true);
+    };
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get("http://localhost:5000/userEmails");
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchData();
+      if (forwardTask) {
+        const timeoutId = setTimeout(() => {
+          setForwardTask(false);
+        }, 2000);
+
+        // Clear the timeout if the component unmounts or forwardTask becomes false before 4 seconds
+        return () => clearTimeout(timeoutId);
+      }
+    }, [forwardTask]);
+
+  return (
+    //! left home wrapper
+          <div className="home-wrapper">
+            <div className="left-home">
+              <h1 className="profile">{displayUserName}</h1>
+              <h1 className="headers-left-home" onClick={handleViewTask}>
+                View Task
+              </h1>
+              <h1 className="headers-left-home">Task Status</h1>
+              <h1 className="headers-left-home" onClick={handleLogOut}>
+                Log Out
+              </h1>
+            </div>
+    {/* right home wrapper*/}
+            <div className="right-home">
+              <h1 className="main-assign-h1">Pending Task</h1>
+              {viewTask ? (
+                <div className="assign">
+                  {deleteIcon ? null : (
+                    <div className="assign-wrapper">
+                      {mainTaskArray.map((task, index) => (
+                        <div key={index} className="box">
+                          <div className="hold-content">
+                            <div className="another-hold">
+                              <input type="checkbox" checked={isChecked} onChange={handleCheckBox} className="checkbox-class"/>
+                              <h1 className={ isChecked ? "task-title-checked" : "task-title" } >
+                                {task.taskAssignTitle}
+                              </h1>
+                            </div>
+                            <DeleteIcon className="delete-icon" fontSize="30px" onClick={handleDelete} />
+                          </div>
+                          <div className="main-desc" onClick={handleDesc}>
+                            {showDesc ? (
+                              <div className="parent-task-desc">
+                                <h1 className="task-desc">
+                                  {task.taskAssignDesc}
+                                </h1>
+                                <div className="parent-icon-">
+                                  <ArrowDropDownIcon className="icon-dropdown" fontSize="30px" />
+                                </div>
+                              </div>
+                            ) : (
+                              <ArrowDropUpIcon className="icon-dropdown" fontSize="30px" /> )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+              {forwardTask ? (
+                <motion.div
+                  className="forwardTask"
+                  initial={{ opacity: 0, y: [60, 60, 60, 60] }}
+                  animate={{ opacity: 1, y: [60, 60, 60, 0] }}
+                  transition={{ duration: 2, ease: "easeIn" }}
+                >
+                  <h1 className="forwardTask-header">
+                    Task Assign Successfully!!!!
+                  </h1>
+                </motion.div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
+  )
+}
+
+export default UserSide

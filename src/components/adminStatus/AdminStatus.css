@@ -1,0 +1,64 @@
+.adminstatus-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.completed-header{
+  text-decoration: line-through;
+  color: rgb(46, 46, 46);
+  margin: 0;
+  user-select: none;
+  cursor: pointer;
+}
+
+.status-header{
+    text-align: center;
+    background-color: #b85042;
+    color: white;
+    border-bottom: 10px solid white;
+    padding: 8px 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.status-header-pending{
+  text-align: center;
+  background-color: #b85042;
+  color: white;
+  border-bottom: 10px solid white;
+  padding: 8px 0px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.admin-grid{
+  margin: 10px;
+}
+
+.parent-admin-row1{
+        width: 100%;
+    cursor: pointer;
+}
+.admin-row1 {
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+}
+
+.completed-row1-count{
+  color: rgb(46, 46, 46);
+  margin: 0;
+  user-select: none;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.admin-task-desc {
+  background-color: #e7e8d1;
+  display: flex;
+  align-items: center;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.29);
+}

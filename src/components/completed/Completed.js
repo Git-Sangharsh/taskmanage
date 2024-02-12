@@ -7,9 +7,9 @@ import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import { useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 const Completed = () => {
-
   const dispatch = useDispatch();
   const [completedTasks, setCompletedTasks] = useState([]);
   const userEmail = useSelector((state) => state.signInEmail);
@@ -17,6 +17,8 @@ const Completed = () => {
   const [checked, setChecked] = useState(true);
   const [selectedTaskId, setSelectedTaskId] = useState("");
   const [completeSortState, setCompleteSortState] = useState(false); // Default to sorting in reverse order
+  const [moveToPeding, setMoveToPeding] = useState(false);
+  const [moveToDelete, setMoveToDelete] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +47,7 @@ const Completed = () => {
         .post("http://localhost:5000/del", dataUserID)
         .then((res) => setCompletedTasks(res.data.taskCompleted))
         .catch((err) => console.log(err));
+      setMoveToDelete(true);
       console.log(userEmail, userTitle);
     } catch (error) {
       console.log(
@@ -59,9 +62,11 @@ const Completed = () => {
         sendUserEmail: userEmail,
         sendUserTitle: userTitle,
       };
-      await axios.post("http://localhost:5000/undo", sendData)
+      await axios
+        .post("http://localhost:5000/undo", sendData)
         .then((res) => {
           setCompletedTasks(res.data.taskCompleted);
+          setMoveToPeding(true);
           dispatch({ type: "SET_USER_MAIN_ARRAY", payload: res.data.tasks });
         })
         .catch((err) => console.log(err));
@@ -72,6 +77,23 @@ const Completed = () => {
     }
   };
 
+  useEffect(() => {
+    if (moveToPeding) {
+      const timeoutId = setTimeout(() => {
+        setMoveToPeding(false);
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [moveToPeding]);
+
+  useEffect(() => {
+    if (moveToDelete) {
+      const timeoutId = setTimeout(() => {
+        setMoveToDelete(false);
+      }, 2000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [moveToDelete]);
 
   const handleTaskClick = (task) => {
     if (selectedTaskId === task._id) {
@@ -100,7 +122,7 @@ const Completed = () => {
             ? [...completedTasks].reverse()
             : completedTasks
           ).map((i) => (
-            <div className="completed-box">
+            <div className="completed-box" key={i._id}>
               <div
                 className="parent-completed-row1"
                 onClick={() => {
@@ -162,6 +184,39 @@ const Completed = () => {
             />
             <h1 className="sort-header">SWITCH TO RECENT</h1>
           </div>
+        )}
+        {moveToPeding && (
+          <motion.div
+            className="forwardTask"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: [0, 0] }}
+            exit={{ opacity: 0, y: 60 }}
+            transition={{
+              duration: 2,
+              type: "spring",
+              ease: "easeIn",
+              times: [1, 1],
+            }}
+          >
+            <h1 className="forwardTask-header">Undo Task Successfully!!!!</h1>
+          </motion.div>
+        )}
+
+        {moveToDelete && (
+          <motion.div
+            className="forwardTask"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: [0, 0] }}
+            exit={{ opacity: 0, y: 60 }}
+            transition={{
+              duration: 2,
+              type: "spring",
+              ease: "easeIn",
+              times: [1, 1],
+            }}
+          >
+            <h1 className="forwardTask-header">Task Deleted Successfully!!!!</h1>
+          </motion.div>
         )}
       </div>
     </div>

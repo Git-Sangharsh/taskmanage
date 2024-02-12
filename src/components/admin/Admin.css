@@ -20,6 +20,14 @@
     flex-direction: column;
 }
 
+.in-headers-exist{
+    width: 100%;
+    text-align: start;
+    font-size: 12px;
+    margin: 05px 0px 00px 0px;
+    color: red;
+}
+
 .admin-headers{
     width: 100%;
     text-align: start;

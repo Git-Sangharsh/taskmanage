@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './UserSide.css';
+import "./UserSide.css";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import Completed from "../completed/Completed";
 
 const UserSide = () => {
@@ -30,7 +30,7 @@ const UserSide = () => {
   // const [deleteTask, setDeleteTask] = useState("");
 
   // console.log('userEmail is ', userEmail);
-  console.log('mainTaskArray ', mainTaskArray)
+  console.log("mainTaskArray ", mainTaskArray);
   // console.log('taskTitle is', taskTitle , "taskDesc is", taskDesc)
 
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -38,17 +38,20 @@ const UserSide = () => {
     try {
       const dataSend = {
         sendTaskEmail: userEmail,
-        sendTaskTitle: taskTitle
-      }
+        sendTaskTitle: taskTitle,
+      };
 
-      await axios.post('http://localhost:5000/completed', dataSend);
+      await axios.post("http://localhost:5000/completed", dataSend);
 
       // Update the state after a successful response from the server
-      const updatedTasks = mainTaskArray.filter(task => task._id !== taskId);
+      const updatedTasks = mainTaskArray.filter((task) => task._id !== taskId);
       dispatch({ type: "SET_USER_MAIN_ARRAY", payload: updatedTasks });
+      setForwardTask(true);
 
       // Request the remaining tasks after completion
-      const remainingTasksResponse = await axios.get(`http://localhost:5000/completedget?sendTaskEmail=${userEmail}`);
+      const remainingTasksResponse = await axios.get(
+        `http://localhost:5000/completedget?sendTaskEmail=${userEmail}`
+      );
       const remainingTasks = remainingTasksResponse.data.completeUpdate;
 
       // Update the state with the remaining tasks
@@ -61,7 +64,7 @@ const UserSide = () => {
 
       console.log("completed data is ", remainingTasks);
     } catch (error) {
-      console.log('error found in the completed Endpoint: ' + error.message);
+      console.log("error found in the completed Endpoint: " + error.message);
     }
   };
 
@@ -70,38 +73,43 @@ const UserSide = () => {
   const handleDeleteTask = (taskId) => {
     const taskDelete = {
       emailSend: userEmail,
-      taskNameSend: taskId
+      taskNameSend: taskId,
     };
 
     // console.log(taskDelete)
 
-    axios.post('http://localhost:5000/deleted', taskDelete)
+    axios
+      .post("http://localhost:5000/deleted", taskDelete)
       .then(async (res) => {
         // console.log(res.data);
 
-
         // Update the state only after a successful response from the server
-        const updatedTasks = mainTaskArray.filter(task => task._id !== taskId);
+        const updatedTasks = mainTaskArray.filter(
+          (task) => task._id !== taskId
+        );
         dispatch({ type: "SET_USER_MAIN_ARRAY", payload: updatedTasks });
 
         // Request the remaining tasks after deletion
-        const remainingTasksResponse = await axios.get(`http://localhost:5000/remaining?emailSend=${userEmail}`);
+        const remainingTasksResponse = await axios.get(
+          `http://localhost:5000/remaining?emailSend=${userEmail}`
+        );
         const remainingTasks = remainingTasksResponse.data.remainingTasks;
         // Update the state with the remaining tasks
         dispatch({ type: "SET_USER_MAIN_ARRAY", payload: remainingTasks });
       })
-      .catch(err => {
-        console.log('error found inside deleted endpoint inside UserSide ', err);
+      .catch((err) => {
+        console.log(
+          "error found inside deleted endpoint inside UserSide ",
+          err
+        );
       });
 
     console.log(taskDelete);
   };
 
-
-
   const handleCheckboxCheck = () => {
     setCompleteTask(!completeTask);
-  }
+  };
 
   const handleLogOut = () => {
     dispatch({ type: "SET_ADMIN_NAME", payload: "" });
@@ -116,10 +124,9 @@ const UserSide = () => {
 
   // !!!!!!!!!!!!!!
   const handleViewTaskCompleted = () => {
-    console.log('clic')
     setViewTask(false);
     // setViewTaskCompleted(true)
-  }
+  };
 
   const handleCheckBox = (taskId) => {
     setTaskCheckboxStates((prevStates) => ({
@@ -155,8 +162,7 @@ const UserSide = () => {
 
       return () => clearTimeout(timeoutId);
     }
-  }, [forwardTask,]);
-
+  }, [forwardTask]);
 
   // useEffect(() => {
   //   console.log('mainTaskArray:', mainTaskArray);
@@ -164,19 +170,29 @@ const UserSide = () => {
   // console.log('selectedTaskDesc is ', selectedTaskDesc)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/')
-  }, [])
+    axios.get("http://localhost:5000/");
+  }, []);
   return (
     <div className="home-wrapper">
       <div className="left-home">
-        <h1 className="profile">{displayUserName}</h1>
-        <h1 className={ viewTask ? "headers-left-home-active" : "headers-left-home"} onClick={handleViewTask}>
-        Task Pending
+        <h1 className="profile">{displayUserName.toUpperCase()}</h1>
+        <h1
+          className={
+            viewTask ? "headers-left-home-active" : "headers-left-home"
+          }
+          onClick={handleViewTask}
+        >
+          Task Pending
         </h1>
-        <h1 onClick={handleViewTaskCompleted}
-        className={ !viewTask ? "headers-left-home-active" : "headers-left-home"}
-        >Task Completed</h1>
-        <h1 className="headers-left-home">Task Status</h1>
+        <h1
+          onClick={handleViewTaskCompleted}
+          className={
+            !viewTask ? "headers-left-home-active" : "headers-left-home"
+          }
+        >
+          Task Completed
+        </h1>
+        {/* <h1 className="headers-left-home">Task Status</h1> */}
         <h1 className="headers-left-home" onClick={handleLogOut}>
           Log Out
         </h1>
@@ -185,41 +201,57 @@ const UserSide = () => {
       <div className="right-home">
         {viewTask ? (
           <div className="inner-right-home">
-            <h1 className="main-assign-h1">Pending Task</h1>
+            <h1 className="main-assign-h1">TASK PENDING</h1>
             {mainTaskArray.map((i) => (
-              <div key={i._id} className="task-box"
-              onClick={() => {
-              handleTaskClick(i);
-              handleCheckboxCheck(i._id);
-            }}>
+              <div
+                key={i._id}
+                className="task-box"
+                onClick={() => {
+                  handleTaskClick(i);
+                  handleCheckboxCheck(i._id);
+                }}
+              >
                 <div className="row-one">
                   <div className="row-one-inner-div">
-                  <input
-                    type="checkbox"
-                    checked={taskCheckboxStates[i._id] || false}
-                    onChange={() => {
-                      handleCheckBox(i._id);
-                      if (!taskCheckboxStates[i._id]) {
-                        handleSubmitTask(i.taskAssignTitle, i.taskAssignDesc, i._id);
-                      }
+                    <input
+                      type="checkbox"
+                      checked={taskCheckboxStates[i._id] || false}
+                      onChange={() => {
+                        handleCheckBox(i._id);
+                        if (!taskCheckboxStates[i._id]) {
+                          handleSubmitTask(
+                            i.taskAssignTitle,
+                            i.taskAssignDesc,
+                            i._id
+                          );
+                        }
                       }}
                       className="checkbox-class"
                     />
                     <h1
-
-                      className={taskCheckboxStates[i._id] ? "task-header-checked" : "task-header-userside"}
+                      className={
+                        taskCheckboxStates[i._id]
+                          ? "task-header-checked"
+                          : "task-header-userside"
+                      }
                     >
                       {i.taskAssignTitle.toUpperCase()}
                     </h1>
                   </div>
                   {/* <button>Submit</button> */}
-                  <DeleteIcon className="delete-icon" fontSize="30px" onClick={() => handleDeleteTask(i.taskAssignTitle)}/>
+                  <DeleteIcon
+                    className="delete-icon"
+                    fontSize="30px"
+                    onClick={() => handleDeleteTask(i.taskAssignTitle)}
+                  />
                 </div>
                 <div className="row-two">
                   {selectedTaskId === i._id && (
                     <div className="selected-task-desc">
-                      <DoubleArrowIcon fontSize="30px" className="arrow-icon"/>
-                      <h1 className="row-two-header">{i.taskAssignDesc.toUpperCase()} -- Task Assign By Admin</h1>
+                      <DoubleArrowIcon fontSize="30px" className="arrow-icon" />
+                      <h1 className="row-two-header">
+                        {i.taskAssignDesc.toUpperCase()} -- Task Assign By Admin
+                      </h1>
                     </div>
                   )}
                 </div>
@@ -227,22 +259,27 @@ const UserSide = () => {
             ))}
           </div>
         ) : (
-          <div className="right-home-completed"> {!viewTask && <Completed />}</div>
+          <div className="right-home-completed">
+            {!viewTask && <Completed />}
+          </div>
         )}
 
-        {forwardTask ? (
+        {forwardTask && (
           <motion.div
             className="forwardTask"
-            initial={{ opacity: 0, y: [60, 60, 60, 60] }}
-            animate={{ opacity: 1, y: [60, 60, 60, 0] }}
-            transition={{ duration: 2, ease: "easeIn" }}
+            initial={{ opacity: 0, y: 60 }}
+            // animate={{opacity: 1, y: [0, 0, 0 ] }}
+            animate={{ opacity: 1, y: [0, 0] }}
+            exit={{ opacity: 0, y: 60 }}
+            transition={{
+              duration: 2,
+              type: "spring",
+              ease: "easeIn",
+              times: [1, 1],
+            }}
           >
-            <h1 className="forwardTask-header">
-              Task Assign Successfully!!!!
-            </h1>
+            <h1 className="forwardTask-header">Task Assign Successfully!!!!</h1>
           </motion.div>
-        ) : (
-          <div></div>
         )}
       </div>
     </div>

@@ -96,3 +96,73 @@
   cursor: pointer;
 }
 
+/* ! */
+@media (max-width: 768px){
+
+  .hold-sort{
+    height: 40px;
+  border-bottom: 5px solid whitesmoke;
+
+  }
+  .sort-header{
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 445px){
+  .completed-row1-header{
+    font-size: 16px;
+  }
+  .row-two-header {
+    font-size: 12px !important;
+    padding: 4px 4px;
+  }
+
+  .hold-sort{
+    height: 30px;
+  border-bottom: 5px solid whitesmoke;
+
+  }
+  .sort-header{
+    font-size: 16px;
+  }
+
+  .completed-sort-icon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 425px){
+
+  .completed-main-header{
+    font-size: 22px;
+  }
+  .completed-row1-checkbox{
+    height: 20px !important;
+    width: 20px !important;
+  }
+
+  .completed-delete-icon {
+    font-size: 20px;
+    }
+}
+
+ @media (max-width: 320px){
+  .completed-main-header{
+    font-size: 20px;
+  }
+
+  .hold-sort{
+    height: 20px;
+  border-bottom: 5px solid whitesmoke;
+
+  }
+  .sort-header{
+    font-size: 10px;
+  }
+
+  .completed-sort-icon {
+    font-size: 20px;
+  }
+
+ }

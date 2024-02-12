@@ -3,6 +3,7 @@ import "./Home.css";
 import { useSelector } from "react-redux";
 import AdminSide from "../adminSide/AdminSide";
 import UserSide from "../userSide/UserSide";
+// import Random from "./Random";
 
 const Home = () => {
 
@@ -22,6 +23,7 @@ const Home = () => {
             <UserSide />
         )}
       </div>
+        {/* <Random /> */}
     </div>
   );
 };

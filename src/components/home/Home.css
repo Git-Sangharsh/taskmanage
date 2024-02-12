@@ -17,14 +17,79 @@
 }
 
 .left-home {
+  display: none;
   width: 15%;
   color: white;
   display: flex;
   flex-direction: column;
-  /* border-right: 1px solid black; */
   background-color: #e7e8d1;
   min-height: 100vh;
+  position: absolute;
+  z-index: 997;
+
+  background-color: red;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
+
 }
+
+.left-home-hide{
+  display: none;
+  width: 15%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  background-color: #e7e8d1;
+  min-height: 100vh;
+  position: absolute;
+  z-index: 997;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
+
+}
+
+.fill{
+  position: absolute;
+  height: 100%;
+  width: 99.8%;
+  background-color: rgba(0, 0, 0, 0.268);
+  z-index: 990;
+  backdrop-filter: blur(5px);
+}
+
+.left-icon-absolute{
+  position: absolute;
+  height: max-content;
+  left: 15%;
+  backdrop-filter: blur(5px);
+  background-color: #E7E8D1;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 10px;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
+  cursor: pointer;
+}
+
+.left-icon-absolute-in{
+  position: absolute;
+  height: max-content;
+  backdrop-filter: blur(5px);
+  background-color: #E7E8D1;
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 15%;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
+  cursor: pointer;
+
+}
+
+.icon-class{
+  color: #B85042;
+  font-size: 50px;
+}
+
 
 .profile {
   display: flex;
@@ -72,6 +137,7 @@
 .right-home {
   width: 85%;
   position: relative;
+  min-height: 100vh;
   /* overflow: hidden !important; Make sure overflowing content is hidden */
   /* padding: 20px 50px 50px 50px; */
 }

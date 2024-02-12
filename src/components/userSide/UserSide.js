@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UserSide.css";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useAnimationControls } from "framer-motion";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 import Completed from "../completed/Completed";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 const UserSide = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const adminName = useSelector((state) => state.adminName);
   const signInUserName = useSelector((state) => state.signInUserName);
-  // console.log('signinusername is ', signInUserName)
   const displayUserName =
     adminName !== "" ? adminName : signInUserName || "Default Name";
   const mainTaskArray = useSelector((state) => state.userMainArray);
@@ -24,16 +25,15 @@ const UserSide = () => {
   const [viewTask, setViewTask] = useState(true);
   const [selectedTaskId, setSelectedTaskId] = useState("");
   const [completeTask, setCompleteTask] = useState(false);
-  // const [viewTaskCompleted, setViewTaskCompleted] = useState(false);
-  // const [arrCompleteTask, setArrCompleteTask] = useState([]);
-  // const [selectedTaskDesc, setSelectedTaskDesc] = useState("");
-  // const [deleteTask, setDeleteTask] = useState("");
+  const [leftAnimation, setLeftAnimation] = useState(false);
+  const controls = useAnimationControls();
 
-  // console.log('userEmail is ', userEmail);
-  console.log("mainTaskArray ", mainTaskArray);
-  // console.log('taskTitle is', taskTitle , "taskDesc is", taskDesc)
+  const handleLeftAnimation = () => {
+    setLeftAnimation(!leftAnimation);
+    console.log("shit is click");
+    controls.start({ x: leftAnimation ? 0 : "-100%" });
+  };
 
-  // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const handleSubmitTask = async (taskTitle, taskId) => {
     try {
       const dataSend = {
@@ -164,44 +164,96 @@ const UserSide = () => {
     }
   }, [forwardTask]);
 
-  // useEffect(() => {
-  //   console.log('mainTaskArray:', mainTaskArray);
-  // }, [mainTaskArray]);
-  // console.log('selectedTaskDesc is ', selectedTaskDesc)
-
   useEffect(() => {
     axios.get("http://localhost:5000/");
   }, []);
+
   return (
     <div className="home-wrapper">
-      <div className="left-home">
-        <h1 className="profile">{displayUserName.toUpperCase()}</h1>
-        <h1
-          className={
-            viewTask ? "headers-left-home-active" : "headers-left-home"
-          }
-          onClick={handleViewTask}
+      <AnimatePresence>
+        {leftAnimation ? (
+          <motion.div className="left-home-hide" animate={controls}>
+            <h1 className="profile">{displayUserName.toUpperCase()}</h1>
+            <h1
+              className={
+                viewTask ? "headers-left-home-active" : "headers-left-home"
+              }
+              onClick={handleViewTask}
+            >
+              Task Pending
+            </h1>
+            <h1
+              onClick={handleViewTaskCompleted}
+              className={
+                !viewTask ? "headers-left-home-active" : "headers-left-home"
+              }
+            >
+              Task Completed
+            </h1>
+            {/* <h1 className="headers-left-home">Task Status</h1> */}
+            <h1 className="headers-left-home" onClick={handleLogOut}>
+              Log Out
+            </h1>
+          </motion.div>
+        ) : (
+          <motion.div className="left-home-hide" animate={controls}>
+            <h1 className="profile">{displayUserName.toUpperCase()}</h1>
+            <h1
+              className={
+                viewTask ? "headers-left-home-active" : "headers-left-home"
+              }
+              onClick={handleViewTask}
+            >
+              Task Pending
+            </h1>
+            <h1
+              onClick={handleViewTaskCompleted}
+              className={
+                !viewTask ? "headers-left-home-active" : "headers-left-home"
+              }
+            >
+              Task Completed
+            </h1>
+            {/* <h1 className="headers-left-home">Task Status</h1> */}
+            <h1 className="headers-left-home" onClick={handleLogOut}>
+              Log Out
+            </h1>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* !!!!!!!!!!!!! position absolute */}
+
+      {leftAnimation ? (
+        <div className="fill-true"></div>
+      ) : (
+        <div className="fill"></div>
+      )}
+      {leftAnimation ? (
+        <motion.div
+          className="left-icon-absolute"
+          onClick={handleLeftAnimation}
         >
-          Task Pending
-        </h1>
-        <h1
-          onClick={handleViewTaskCompleted}
-          className={
-            !viewTask ? "headers-left-home-active" : "headers-left-home"
-          }
+          <KeyboardDoubleArrowLeftIcon className="icon-class" fontSize="30px" />
+        </motion.div>
+      ) : (
+        <motion.div
+          className="left-icon-absolute-in"
+          onClick={handleLeftAnimation}
         >
-          Task Completed
-        </h1>
-        {/* <h1 className="headers-left-home">Task Status</h1> */}
-        <h1 className="headers-left-home" onClick={handleLogOut}>
-          Log Out
-        </h1>
-      </div>
+          <KeyboardDoubleArrowRightIcon
+            className="icon-class"
+            fontSize="30px"
+          />
+        </motion.div>
+      )}
 
       <div className="right-home">
         {viewTask ? (
           <div className="inner-right-home">
-            <h1 className="main-assign-h1">TASK PENDING</h1>
+            <h1 className="main-assign-h1" onClick={handleLeftAnimation}>
+              TASK PENDING
+            </h1>
             {mainTaskArray.map((i) => (
               <div
                 key={i._id}

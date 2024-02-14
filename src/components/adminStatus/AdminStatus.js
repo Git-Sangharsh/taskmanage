@@ -17,8 +17,7 @@ const AdminStatus = () => {
     axios
       .get(`http://localhost:5000/getTask?value=${e.target.value}`)
       .then((response) => {
-        // Handle the response data if needed
-        setTasks(response.data.mainTasks);
+          setTasks(response.data.mainTasks);
         setCompletedTasks(response.data.complete);
       })
       .catch((error) => {

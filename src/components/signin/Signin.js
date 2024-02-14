@@ -29,9 +29,12 @@ const Signin = () => {
     };
 
     axios
-      .get("http://localhost:5000/signin", { params: signinData })
+      .get("http://localhost:5000/signin", {
+        params: signinData,
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.signin === "signin") {
           dispatch({ type: "SET_SIGNIN_NAME", payload: res.data.user });
           dispatch({ type: "SET_SIGNIN_EMAIL", payload: res.data.userEmail });
@@ -41,35 +44,33 @@ const Signin = () => {
             type: "SET_USER_MAIN_ARRAY",
             payload: res.data.userMainArray,
           });
+          const authToken = res.data.auth;
+          localStorage.setItem("token", authToken);
           navigate("/home");
         } else if (res.data.incorrect === "wrong") {
-          console.log("password is incorrect kindly check out!!!");
           setIncorrectPassword(true);
-        } else {
-          console.log("Sign in failed");
         }
       })
       .catch((err) => {
-        console.log("error found while fetch in signin", err);
         setUserNotCreated(true);
       });
   };
 
   useEffect(() => {
-    if(userNotCreated){
+    if (userNotCreated) {
       const timeoutId = setTimeout(() => {
         setUserNotCreated(false);
-      },3000)
-      return () => clearTimeout(timeoutId)
+      }, 3000);
+      return () => clearTimeout(timeoutId);
     }
 
-    if(incorrectPassword){
+    if (incorrectPassword) {
       const timeoutId = setTimeout(() => {
         setIncorrectPassword(false);
-      }, 3000)
-      return () => clearTimeout(timeoutId)
+      }, 3000);
+      return () => clearTimeout(timeoutId);
     }
-  }, [userNotCreated, incorrectPassword])
+  }, [userNotCreated, incorrectPassword]);
 
   // console.log("know is ",know)
   return (

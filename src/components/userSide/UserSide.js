@@ -30,7 +30,6 @@ const UserSide = () => {
 
   const handleLeftAnimation = () => {
     setLeftAnimation(!leftAnimation);
-    console.log("shit is click");
     controls.start({ x: leftAnimation ? 0 : "-100%" });
   };
 
@@ -54,17 +53,13 @@ const UserSide = () => {
       );
       const remainingTasks = remainingTasksResponse.data.completeUpdate;
 
-      // Update the state with the remaining tasks
       dispatch({ type: "SET_USER_MAIN_ARRAY", payload: remainingTasks });
 
-      // Update checkbox states if the task is completed
       if (taskCheckboxStates[taskId]) {
         handleCheckBox(taskId);
       }
-
-      console.log("completed data is ", remainingTasks);
     } catch (error) {
-      console.log("error found in the completed Endpoint: " + error.message);
+      console.log(error.message);
     }
   };
 
@@ -76,13 +71,9 @@ const UserSide = () => {
       taskNameSend: taskId,
     };
 
-    // console.log(taskDelete)
-
     axios
       .post("http://localhost:5000/deleted", taskDelete)
       .then(async (res) => {
-        // console.log(res.data);
-
         // Update the state only after a successful response from the server
         const updatedTasks = mainTaskArray.filter(
           (task) => task._id !== taskId
@@ -98,13 +89,8 @@ const UserSide = () => {
         dispatch({ type: "SET_USER_MAIN_ARRAY", payload: remainingTasks });
       })
       .catch((err) => {
-        console.log(
-          "error found inside deleted endpoint inside UserSide ",
-          err
-        );
+        console.log("error found inside ", err);
       });
-
-    console.log(taskDelete);
   };
 
   const handleCheckboxCheck = () => {
@@ -113,6 +99,9 @@ const UserSide = () => {
 
   const handleLogOut = () => {
     dispatch({ type: "SET_ADMIN_NAME", payload: "" });
+    dispatch({ type: "SET_SIGNIN_NAME", payload: "" });
+    const emptyToken = "";
+    localStorage.setItem("token", emptyToken);
     navigate("/");
   };
 
@@ -149,7 +138,6 @@ const UserSide = () => {
     const fetchData = async () => {
       try {
         axios.get("http://localhost:5000/userEmails");
-        // console.log(response);
       } catch (error) {
         console.error(error);
       }

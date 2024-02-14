@@ -29,10 +29,9 @@
 
   background-color: red;
   box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
-
 }
 
-.left-home-hide{
+.left-home-hide {
   display: none;
   width: 15%;
   color: white;
@@ -43,10 +42,9 @@
   position: absolute;
   z-index: 997;
   box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
-
 }
 
-.fill{
+.fill {
   position: absolute;
   height: 100%;
   width: 99.8%;
@@ -55,41 +53,45 @@
   backdrop-filter: blur(5px);
 }
 
-.left-icon-absolute{
+.left-icon-absolute {
   position: absolute;
   height: max-content;
   left: 15%;
   backdrop-filter: blur(5px);
-  background-color: #E7E8D1;
+  background-color: #e7e8d1;
   z-index: 998;
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 10px;
+  top: 24px;
+  left: 0;
   box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
   cursor: pointer;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-.left-icon-absolute-in{
+.left-icon-absolute-in {
   position: absolute;
   height: max-content;
   backdrop-filter: blur(5px);
-  background-color: #E7E8D1;
+  background-color: #e7e8d1;
   z-index: 998;
   display: flex;
   align-items: center;
   justify-content: center;
   left: 15%;
+  top: 24px;
   box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.305);
   cursor: pointer;
-
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
-.icon-class{
-  color: #B85042;
+.icon-class {
+  color: #b85042;
   font-size: 50px;
 }
-
 
 .profile {
   display: flex;
@@ -138,6 +140,7 @@
   width: 85%;
   position: relative;
   min-height: 100vh;
+  box-sizing: border-box;
   /* overflow: hidden !important; Make sure overflowing content is hidden */
   /* padding: 20px 50px 50px 50px; */
 }
@@ -327,39 +330,6 @@
 
 /* ! */
 @media (min-width: 768px) {
-    .home-wrapper {
-      width: 100%;
-    }
-
-    .left-home {
-      width: max-content;
-    }
-    .right-home {
-      width: 100%;
-      position: relative;
-    }
-
-    .profile,
-    .headers-left-home {
-      color: black;
-      font-size: 20px;
-      font-weight: bolder;
-      padding: 0px 10px;
-    }
-
-    .headers-left-home-active {
-      font-size: 20px;
-      font-weight: bolder;
-      padding: 0px 10px;
-    }
-
-    .row-two-header {
-      font-size: 12px !important;
-      padding: 4px 4px;
-    }
-  }
-
-@media (max-width: 767px) {
   .home-wrapper {
     width: 100%;
   }
@@ -392,22 +362,102 @@
   }
 }
 
-@media (max-width: 445px ){
-    .right-home {
-        background-color: #a7beae;
-      }
+@media (max-width: 767px) {
+  .home-wrapper {
+    width: 100%;
+  }
 
-      .task-header-userside {
-        font-size: 16px;
-      }
+  .left-home-hide {
+    width: 200px;
+  }
+
+  .left-icon-absolute-in {
+    left: 200px;
+    top: 24px;
+  }
+
+  .left-icon-absolute {
+    top: 24px;
+    left: 0;
+  }
+
+  .icon-class {
+    color: #b85042;
+    font-size: 30px;
+  }
+
+  .right-home {
+    width: 100%;
+    position: relative;
+  }
+
+  .profile,
+  .headers-left-home {
+    color: black;
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 0px 10px;
+  }
+
+  .headers-left-home-active {
+    font-size: 20px;
+    font-weight: bolder;
+    padding: 0px 10px;
+  }
+
+  .row-two-header {
+    font-size: 12px !important;
+    padding: 4px 4px;
+  }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 445px) {
   .right-home {
     background-color: #a7beae;
   }
 
-  .main-assign-h1{
+  .task-header-userside {
+    font-size: 16px;
+  }
+
+  .left-home-hide {
+    width: 180px;
+  }
+
+  .left-icon-absolute-in {
+    left: 180px;
+    top: 24px;
+  }
+
+  .icon-class {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 425px) {
+  .left-home-hide {
+    width: 150px;
+  }
+
+  .left-icon-absolute-in {
+    left: 150px;
+  }
+
+  .icon-class {
+    font-size: 22px;
+  }
+
+  .headers-left-home,
+  .headers-left-home-active,
+  .profile {
+    font-size: 15px;
+  }
+
+  .right-home {
+    background-color: #a7beae;
+  }
+
+  .main-assign-h1 {
     font-size: 22px;
   }
   .task-header-userside {
@@ -415,8 +465,8 @@
   }
 
   .checkbox-class {
-        height: 20px !important;
-        width: 20px !important;
+    height: 20px !important;
+    width: 20px !important;
   }
   .delete-icon,
   .arrow-icon {
@@ -456,16 +506,23 @@
   }
 }
 
-@media (max-width: 320px){
-    .main-assign-h1 {
-        font-size:20px;
-      }
+@media (max-width: 320px) {
+  .main-assign-h1 {
+    font-size: 20px;
+  }
 
-      .task-header-userside{
-        font-size: 14px;
-      }
-      .row-one {
-        padding: 0px 0px;
-      }
+  .task-header-userside {
+    font-size: 14px;
+  }
+  .row-one {
+    padding: 0px 0px;
+  }
 
+  .gmail-options {
+    width: min-content;
+    font-size: 15px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black !important;
+  }
 }

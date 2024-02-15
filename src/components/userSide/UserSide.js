@@ -49,7 +49,7 @@ const UserSide = () => {
 
       // Request the remaining tasks after completion
       const remainingTasksResponse = await axios.get(
-        `http://localhost:5000/completedget?sendTaskEmail=${userEmail}`
+        `https://taskmanagebackend-bdus.onrender.com/completedget?sendTaskEmail=${userEmail}`
       );
       const remainingTasks = remainingTasksResponse.data.completeUpdate;
 
@@ -72,7 +72,7 @@ const UserSide = () => {
     };
 
     axios
-      .post("http://localhost:5000/deleted", taskDelete)
+      .post("https://taskmanagebackend-bdus.onrender.com/deleted", taskDelete)
       .then(async (res) => {
         // Update the state only after a successful response from the server
         const updatedTasks = mainTaskArray.filter(
@@ -82,7 +82,7 @@ const UserSide = () => {
 
         // Request the remaining tasks after deletion
         const remainingTasksResponse = await axios.get(
-          `http://localhost:5000/remaining?emailSend=${userEmail}`
+          `https://taskmanagebackend-bdus.onrender.com/remaining?emailSend=${userEmail}`
         );
         const remainingTasks = remainingTasksResponse.data.remainingTasks;
         // Update the state with the remaining tasks

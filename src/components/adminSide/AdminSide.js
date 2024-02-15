@@ -62,7 +62,7 @@ const AdminSide = () => {
     };
 
     axios
-      .post("http://localhost:5000/assigntask", sendTaskData)
+      .post("https://taskmanagebackend-bdus.onrender.com/assigntask", sendTaskData)
       .then((res) => {
         setForwardTask(true);
         // alert("Task Asign Successful");
@@ -90,7 +90,7 @@ const AdminSide = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/userEmails");
+        const response = await axios.get("https://taskmanagebackend-bdus.onrender.com/userEmails");
         setUserEmails(response.data.userEmails);
       } catch (error) {
         console.error(error);

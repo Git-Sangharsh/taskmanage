@@ -30,7 +30,7 @@ const Admin = () => {
             sendAdminPassword : adminPassword
         }
 
-        axios.get("http://localhost:5000/admin", {params : adminData, headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }})
+        axios.get("https://taskmanagebackend-bdus.onrender.com/admin", {params : adminData, headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }})
         .then(res => {
             dispatch({type: 'SET_ADMIN_NAME', payload: res.data.adminName});
             if(res.data.adminExist === "notExist"){

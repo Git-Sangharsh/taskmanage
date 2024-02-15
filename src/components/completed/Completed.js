@@ -24,7 +24,7 @@ const Completed = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/completedget?sendTaskEmail=${userEmail}`
+          `https://taskmanagebackend-bdus.onrender.com/completedget?sendTaskEmail=${userEmail}`
         );
         const remainingTasks = response.data.completedTasks;
         setCompletedTasks(remainingTasks);
@@ -44,7 +44,7 @@ const Completed = () => {
         sendUserTitle: userTitle,
       };
       await axios
-        .post("http://localhost:5000/del", dataUserID)
+        .post("https://taskmanagebackend-bdus.onrender.com/del", dataUserID)
         .then((res) => setCompletedTasks(res.data.taskCompleted))
         .catch((err) => console.log(err));
       setMoveToDelete(true);
@@ -63,7 +63,7 @@ const Completed = () => {
         sendUserTitle: userTitle,
       };
       await axios
-        .post("http://localhost:5000/undo", sendData)
+        .post("https://taskmanagebackend-bdus.onrender.com/undo", sendData)
         .then((res) => {
           setCompletedTasks(res.data.taskCompleted);
           setMoveToPeding(true);

@@ -15,7 +15,7 @@ const AdminStatus = () => {
   const handleGmail = (e) => {
     setSelectGmail(e.target.value);
     axios
-      .get(`http://localhost:5000/getTask?value=${e.target.value}`)
+      .get(`https://taskmanagebackend-bdus.onrender.com/getTask?value=${e.target.value}`)
       .then((response) => {
           setTasks(response.data.mainTasks);
         setCompletedTasks(response.data.complete);
@@ -28,7 +28,7 @@ const AdminStatus = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/userEmails");
+        const response = await axios.get("https://taskmanagebackend-bdus.onrender.com/userEmails");
         setUserEmails(response.data.userEmails);
       } catch (error) {
         console.log("error from the AdminStatus ", error);

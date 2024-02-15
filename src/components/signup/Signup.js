@@ -41,7 +41,7 @@ const Signup = () => {
             sendSignupPassword: signupPassword
         };
 
-        axios.post("http://localhost:5000/signup", signupData)
+        axios.post("https://taskmanagebackend-bdus.onrender.com/signup", signupData)
             .then(res => {
                 if (res.data.signup === 'signup') {
                     navigate('/')

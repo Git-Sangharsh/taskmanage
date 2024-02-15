@@ -40,7 +40,7 @@ const UserSide = () => {
         sendTaskTitle: taskTitle,
       };
 
-      await axios.post("http://localhost:5000/completed", dataSend);
+      await axios.post("https://taskmanagebackend-bdus.onrender.com/completed", dataSend);
 
       // Update the state after a successful response from the server
       const updatedTasks = mainTaskArray.filter((task) => task._id !== taskId);

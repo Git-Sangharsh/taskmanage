@@ -4,20 +4,20 @@
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    background-color: black;
+    background-color: white;
 }
 
 .main-admin-header{
-    color: white;
+    color: black;
 }
 
 .admin-wrapper{
-    border: 1px solid white;
     padding: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.252);
 }
 
 .in-headers-exist{
@@ -31,20 +31,12 @@
 .admin-headers{
     width: 100%;
     text-align: start;
-    font-size: 18px;
+    font-size: 14px;
     margin: 10px 0px 0px 0px;
-    color: white;
+    color: black;
 }
 
-a{
-    width: 100%;
-    font-size: 8px ;
-    margin: 0px 10px 0px 10px;
-    width: 100%;
-    color: white;
-    text-decoration: none;
 
-}
 a:hover{
     text-decoration: underline;
     color: rgb(0, 106, 255);
@@ -54,14 +46,18 @@ a:hover{
     width: 200px;
     color: black;
     outline: none;
-    border: 1px solid white;
+    border: 1px solid black;
     font-weight: bold;
 }
 
+.admin-input:focus{
+    background-color: black;
+    color: white;
+}
 .admin-enter{
     padding: 5px;
-    background-color:  rgb(0, 106, 255);
-    border: 1px solid  rgb(0, 106, 255);
+    background-color: rgba(0, 106, 255, 0.232);
+    border: 1px solid rgb(0, 106, 255);
     margin: 20px 0px;
     color: white;
     cursor: pointer;
@@ -71,4 +67,5 @@ a:hover{
 
 .admin-enter:hover{
     scale: 1.1;
+    background-color: #006aff;
 }

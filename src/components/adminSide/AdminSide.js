@@ -64,8 +64,6 @@ const AdminSide = () => {
     axios
       .post("http://localhost:5000/assigntask", sendTaskData)
       .then((res) => {
-        console.log(res); // Log the entire response
-        console.log(res.data.taskArray); // Log the taskArray specifically
         setForwardTask(true);
         // alert("Task Asign Successful");
         setAssignTitle("");
@@ -75,7 +73,6 @@ const AdminSide = () => {
         console.log("error while assigning the task: ", err.message);
       });
 
-    // console.log(selectGmail, assignTitle, assignDesc)
   };
 
   const handleDiscard = () => {
@@ -88,7 +85,6 @@ const AdminSide = () => {
     navigate("/");
     const emptyToken = "";
     localStorage.setItem("token", emptyToken);
-    console.log('log out ')
   };
 
   useEffect(() => {

@@ -278,7 +278,6 @@ const UserSide = () => {
                       {i.taskAssignTitle.toUpperCase()}
                     </h1>
                   </div>
-                  {/* <button>Submit</button> */}
                   <DeleteIcon
                     className="delete-icon"
                     fontSize="30px"

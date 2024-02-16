@@ -137,7 +137,7 @@ const UserSide = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        axios.get("http://localhost:5000/userEmails");
+        axios.get("https://taskmanagebackend-bdus.onrender.com/userEmails");
       } catch (error) {
         console.error(error);
       }
@@ -153,7 +153,7 @@ const UserSide = () => {
   }, [forwardTask]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/");
+    axios.get("https://taskmanagebackend-bdus.onrender.com/");
   }, []);
 
   return (

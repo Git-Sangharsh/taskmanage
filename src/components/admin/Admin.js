@@ -70,12 +70,18 @@ const Admin = () => {
       <h1 className="main-admin-header">Admin</h1>
       <div className="admin-wrapper">
         <h1 className="admin-headers">Username</h1>
-        <input type="text" className="admin-input" onChange={handleAdminName} />
+        <input
+          type="text"
+          className="admin-input"
+          placeholder="admin"
+          onChange={handleAdminName}
+        />
         <h1 className="admin-headers">Key</h1>
         <input
           type="password"
           className="admin-input"
           onChange={handleAdminPassword}
+          placeholder="admin"
         />
         {adminExist && (
           <h1 className="in-headers-exist">Wrong Username or Password!!!</h1>

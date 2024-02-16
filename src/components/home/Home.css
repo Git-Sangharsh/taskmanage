@@ -416,7 +416,7 @@
     background-color: #a7beae;
   }
 
-  .task-header-userside {
+  .task-header-userside, .task-header-checked {
     font-size: 16px;
   }
 
@@ -460,7 +460,7 @@
   .main-assign-h1 {
     font-size: 22px;
   }
-  .task-header-userside {
+  .task-header-userside, .task-header-checked {
     font-size: 16px;
   }
 
@@ -511,7 +511,7 @@
     font-size: 20px;
   }
 
-  .task-header-userside {
+  .task-header-userside, .task-header-checked {
     font-size: 14px;
   }
   .row-one {

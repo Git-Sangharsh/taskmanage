@@ -1,71 +1,90 @@
-.admin{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100vh;
-    background-color: white;
+.admin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: white;
 }
 
-.main-admin-header{
-    color: black;
+.main-admin-header {
+  color: black;
 }
 
-.admin-wrapper{
-    padding: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.252);
+.admin-wrapper {
+  padding: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.252);
 }
 
-.in-headers-exist{
-    width: 100%;
-    text-align: start;
+.in-headers-exist {
+  width: 100%;
+  text-align: start;
+  font-size: 12px;
+  margin: 05px 0px 00px 0px;
+  color: red;
+}
+
+.admin-headers {
+  width: 100%;
+  text-align: start;
+  font-size: 14px;
+  margin: 10px 0px 0px 0px;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: rgb(0, 106, 255);
+}
+.admin-input {
+  padding: 6px;
+  width: 200px;
+  color: black;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+
+.admin-input:focus {
+  background-color: black;
+  color: white;
+}
+.admin-enter {
+  padding: 5px;
+  background-color: rgba(0, 106, 255, 0.232);
+  border: 1px solid rgb(0, 106, 255);
+  margin: 20px 0px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.admin-enter:hover {
+  scale: 1.1;
+  background-color: #006aff;
+}
+
+@media (max-width: 375px) {
+  .admin {
+    height: 90vh;
+  }
+
+  .admin-wrapper {
+    padding: 35px;
+  }
+
+  .admin-input {
+    width: 150px;
+    padding: 4px;
     font-size: 12px;
-    margin: 05px 0px 00px 0px;
-    color: red;
-}
+  }
 
-.admin-headers{
-    width: 100%;
-    text-align: start;
-    font-size: 14px;
-    margin: 10px 0px 0px 0px;
-    color: black;
-}
-
-
-a:hover{
-    text-decoration: underline;
-    color: rgb(0, 106, 255);
-}
-.admin-input{
-    padding: 6px;
-    width: 200px;
-    color: black;
-    outline: none;
-    border: 1px solid black;
-    font-weight: bold;
-}
-
-.admin-input:focus{
-    background-color: black;
-    color: white;
-}
-.admin-enter{
-    padding: 5px;
-    background-color: rgba(0, 106, 255, 0.232);
-    border: 1px solid rgb(0, 106, 255);
-    margin: 20px 0px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 100%;
-}
-
-.admin-enter:hover{
-    scale: 1.1;
-    background-color: #006aff;
+  .in-headers-exist {
+    color: rgb(0, 106, 255) !important ;
+  }
 }

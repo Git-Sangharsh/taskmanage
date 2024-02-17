@@ -98,7 +98,7 @@ const Signin = () => {
       <h1 className="main-in-header">SignIn</h1>
       <div className="signin-wrapper">
         <h1 className="in-headers">Email</h1>
-        <input type="text" className="in-input" onChange={handleSigninEmail} />
+        <input type="text" className="in-input" onChange={handleSigninEmail} placeholder="s@gmail.com"/>
         {userNotCreated && (
           <h1 className="in-headers-exist">User Not Exist !!!</h1>
         )}
@@ -108,6 +108,7 @@ const Signin = () => {
           type="password"
           className="in-input"
           onChange={handleSigninPassword}
+          placeholder="s"
         />
         {incorrectPassword && (
           <h1 className="in-headers-wrong">Incorrect Password !!!</h1>

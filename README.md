@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 ## ADMIN USERNAME AND PASSWORD IS admin
-## SIGNIN USERNAME IS s@gamil.com PASSWORD IS s 
+## SIGNIN USERNAME IS s@gmail.com PASSWORD IS s 
 # Here is the Live Preview :- https://task-556g.onrender.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
